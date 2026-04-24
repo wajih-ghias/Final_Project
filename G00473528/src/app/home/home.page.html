@@ -1,0 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home Page
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ <ion-input label="Search a Movie here" placeholder="keyword" [(ngModel)]="keyword"></ion-input>
+ <ion-button (click)="openMovies()">Search</ion-button>
+</ion-content>
