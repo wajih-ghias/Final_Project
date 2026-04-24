@@ -16,14 +16,12 @@ import { HttpOptions } from '@capacitor/core';
 export class MoviesPage implements OnInit {
 
   keyword:string = "" ;
+  movieInfo!:any ;
   apiKey = "79c899073398240e8015ac544982ea07" ;
   options: HttpOptions = {
-    url: "https://api.themoviedb.org/3/search/movie?query=%20story" + "&api_key=" + this.apiKey 
-  }     
-    ////  https://api.themoviedb.org/3/search/movie?query=toy%20story&api_key=
-
- 
-  // https://api.themoviedb.org/3/search/movie?query=toy story&api_key=YOUR_API_KEY
+    url: ""//"https://api.themoviedb.org/3/search/movie?query=%20story"+"&api_key="+this.apiKey 
+  }     ;
+    
 
 
   constructor(private ds: MyData, private mhs: MyHttpService) { }
@@ -33,8 +31,21 @@ export class MoviesPage implements OnInit {
   }
   async KW() {
     this.keyword = await this.ds.get('kw');
-    this.options.url.concat(this.keyword);
-    this.mhs.get(this.options)
+
+    const myUrl = "https://api.themoviedb.org/3/search/movie?query=" + this.keyword + "&api_key=" + this.apiKey;
+    this.options.url = myUrl;
+    try {
+      const result = await this.mhs.get(this.options);
+      this.movieInfo = result.data;
+      console.log(JSON.stringify(this.movieInfo));
+      //console.log("Success!", result);
+    } catch (error) {
+      //console.error("API Call failed", error);
+    }
+
+
+    //this.options.url = this.options.url.concat(this.keyword);
+    //this.mhs.get(this.options)
   }
 
 }
