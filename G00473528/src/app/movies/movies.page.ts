@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardTitle, Ion
 import { MyData } from '../services/my-data'
 import { MyHttpService } from '../services/my-http-service';
 import { HttpOptions } from '@capacitor/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -14,9 +15,10 @@ import { HttpOptions } from '@capacitor/core';
   imports: [IonCardSubtitle, IonCardHeader, IonCardContent, IonCardTitle, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class MoviesPage implements OnInit {
-
+  posterBaseUrl = "https://image.tmdb.org/t/p/w500"; 
+  movieInfo: any[] = [];
   keyword:string = "" ;
-  movieInfo!:any ;
+ 
   apiKey = "79c899073398240e8015ac544982ea07" ;
   options: HttpOptions = {
     url: ""//"https://api.themoviedb.org/3/search/movie?query=%20story"+"&api_key="+this.apiKey 
@@ -30,17 +32,24 @@ export class MoviesPage implements OnInit {
     this.KW();
   }
   async KW() {
-    this.keyword = await this.ds.get('kw');
-
-    const myUrl = "https://api.themoviedb.org/3/search/movie?query=" + this.keyword + "&api_key=" + this.apiKey;
-    this.options.url = myUrl;
+    const storedKeyword = await this.ds.get('kw');
+    this.keyword = storedKeyword ? storedKeyword.trim() : "" ;
+    let myUrl = "" ;
+    if(this.keyword === "") {
+      myUrl = `https://themoviedb.org{this.apiKey}`;
+    } else {
+     myUrl = "https://api.themoviedb.org/3/search/movie?query=" + this.keyword + "&api_key=" + this.apiKey;
+    
+    }
+     this.options.url = myUrl;
     try {
       const result = await this.mhs.get(this.options);
-      this.movieInfo = result.data;
-      console.log(JSON.stringify(this.movieInfo));
+      this.movieInfo = result.data.results;
+      console.log(this.movieInfo);
       //console.log("Success!", result);
     } catch (error) {
-      //console.error("API Call failed", error);
+      console.error("API Call failed", error);
+      this.movieInfo = [];
     }
 
 

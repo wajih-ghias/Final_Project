@@ -7,6 +7,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
- <ion-input label="Search a Movie here" placeholder="keyword" [(ngModel)]="keyword"></ion-input>
- <ion-button (click)="openMovies()">Search</ion-button>
+ <ion-input [(ngModel)]="keyword" placeholder="Search movies..."></ion-input>
+ <ion-button expand="block"  (click)="openMovies()">Search</ion-button>
+ <h2 style="margin-top: 20px;">Today's Trending Movies</h2>
+  <ion-card *ngFor="let movie of movieInfo">
+    <img *ngIf="movie.poster_path" [src]="posterBaseUrl + movie.poster_path" />
+    <ion-card-header>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+    </ion-card-header>
+
+
+  </ion-card>
 </ion-content>
