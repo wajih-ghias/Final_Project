@@ -1,17 +1,18 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button routerLink="/home"><ion-icon name="home-outline"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>Details</ion-title>
+    <ion-title>Movie Details Page</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/favorites"><ion-icon name="heart"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="ion-padding" *ngIf="movie">
   <h1>{{ movie.title }}</h1>
+ 
   <p>{{ movie.overview }}</p>
 
   <h3>Top Cast</h3>
@@ -20,19 +21,23 @@
       <ion-label>
         <h2>{{ actor.name }}</h2>
         <p>as {{ actor.character }}</p>
+        <img [src]="posterBaseUrl + actor.profile_path" />
       </ion-label>
-    </ion-item>
-  </ion-list>
-
-  <!-- Add to Favourites Button -->
-  <ion-button *ngIf="!isFavorite" expand="block" color="primary" (click)="addToFavorites()">
-    <ion-icon slot="start" name="heart-outline"></ion-icon>
+      <!-- Add to Favourites Button -->
+      <!-- <div *ngIf="!isFavoriteActor(actor)">add to favorite</div> -->
+      <!-- <div *ngIf="isFavoriteActor(actor)">remove favorite</div> -->
+  <ion-button *ngIf="!isFavoriteActor(actor)" expand="block" color="primary" (click)="addToFavorites(actor)">
+     <!-- <ion-icon slot="start" name="heart-outline"></ion-icon> -->
     Add To Favourites
   </ion-button>
   
   <!-- If ALREADY a favorite, show Remove button -->
-  <ion-button *ngIf="isFavorite" expand="block" color="danger" (click)="removeFromFavorites()">
-    <ion-icon slot="start" name="trash-outline"></ion-icon>
+<ion-button *ngIf="isFavoriteActor(actor)" expand="block" color="danger" (click)="removeFromFavorites(actor)">
+    <!-- <ion-icon slot="start" name="trash-outline"></ion-icon> -->
     Remove From Favourites
   </ion-button>
+    </ion-item>
+  </ion-list>
+
+  
 </ion-content>

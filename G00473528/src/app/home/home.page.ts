@@ -7,6 +7,7 @@ import { MyData } from '../services/my-data';
 import { OnInit } from '@angular/core';
 import { MyHttpService } from '../services/my-http-service';
 import { HttpOptions } from '@capacitor/core';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ import { HttpOptions } from '@capacitor/core';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonCardTitle, IonCardHeader, IonCard, IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonCardSubtitle],
+  imports: [IonCardTitle, IonCardHeader, IonCard, IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonCardSubtitle, RouterModule],
 })
 export class HomePage implements OnInit {
   keyword: string="" ;
@@ -42,9 +43,6 @@ export class HomePage implements OnInit {
       console.error("Trending fetch failed", error);
     }
   }
-
-
-
   async openMovies() {
 
     if (!this.keyword || this.keyword.trim() === "") {
