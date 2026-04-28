@@ -4,8 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonBadge, IonLabel, IonItem, IonList, IonIcon, IonButtons } from '@ionic/angular/standalone';
 import { MyHttpService } from '../services/my-http-service';
 import { HttpOptions } from '@capacitor/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MyData } from '../services/my-data';
+import { addIcons } from 'ionicons';
+import { homeOutline, heart, heartOutline, trashOutline } from 'ionicons/icons'; 
 
 @Component({
   selector: 'app-movie-details',
@@ -26,7 +28,9 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
       // let favorites = await this.ds.get('favorites') || [];
     favorites: any;
 
-  constructor(private route: ActivatedRoute, private mhs: MyHttpService, private ds: MyData) { }
+  constructor(private route: ActivatedRoute, private mhs: MyHttpService, private ds: MyData, private router: Router) {
+    addIcons({ homeOutline, heart, heartOutline, trashOutline });
+   }
 
   async ngOnInit() { }
     
@@ -37,7 +41,7 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
     //const headers = {'Authorization':'Bearer ' + this.apiKey  }
     
 
-    console.log("AAAAAAAAAAAAA")
+ 
     console.log(url)
     const result = await this.mhs.get({ url });
     // console.log(result.data)
@@ -78,6 +82,9 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
  isFavoriteActor(actor: any): boolean {
     const found = this.favorites.filter((f: any) => f.id === actor.id);
     return found.length > 0 ;
+  }
+  async openHomePage() {
+    this.router.navigate(['/home']);
   }
 
 }
