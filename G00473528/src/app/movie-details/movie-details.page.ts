@@ -14,11 +14,11 @@ import { homeOutline, heart, heartOutline, trashOutline } from 'ionicons/icons';
   templateUrl: './movie-details.page.html',
   styleUrls: ['./movie-details.page.scss'],
   standalone: true,
-  imports: [IonButtons, IonIcon, IonList, IonItem, IonLabel, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButtons, IonIcon, IonList, IonCardHeader, IonCard, IonItem, IonLabel, IonButton, IonCardTitle, IonCardSubtitle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class MovieDetailsPage implements OnInit, AfterViewInit {
 
-  movie: any;
+  movie: any=null;
   cast: any;
   crew: any;
   isFavorite: boolean =false ;
@@ -64,7 +64,7 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
       await this.ds.set('favorites', favorites);
       this.favorites = favorites;
       this.isFavorite = true;
-      console.log("Added to favorites");
+      console.log("Added to favorites", favorites );
     }
   }
   

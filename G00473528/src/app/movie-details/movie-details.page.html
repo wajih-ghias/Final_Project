@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Movie Details</ion-title>
     <ion-button (click)="openHomePage()">Back to HOME PAGE<ion-icon name="home-outline"></ion-icon></ion-button>
-    <ion-button routerLink="/favorites">Add to Favorite<ion-icon name="heart"></ion-icon></ion-button>
+    <ion-button routerLink="/favorites">Favourite<ion-icon name="heart"></ion-icon></ion-button>
     <ion-buttons slot="end">
       
     </ion-buttons>
@@ -16,6 +16,7 @@
   <h1>{{ movie.title }}</h1>
  
   <p>{{ movie.overview }}</p>
+ 
 
   <h3>Top Cast</h3>
   <ion-list>
@@ -35,9 +36,10 @@
   
   <!-- If ALREADY a favorite, show Remove button -->
 <ion-button *ngIf="isFavoriteActor(actor)" expand="block" color="danger" (click)="removeFromFavorites(actor)">
-    <!-- <ion-icon slot="start" name="trash-outline"></ion-icon> -->
+    <ion-icon slot="start" name="trash-outline"></ion-icon>
     Remove From Favourites
   </ion-button>
     </ion-item>
   </ion-list>  
+  <ion-button *ngIf="!isFavorite" (click)="addToFavorites(movie)">...</ion-button>
 </ion-content>

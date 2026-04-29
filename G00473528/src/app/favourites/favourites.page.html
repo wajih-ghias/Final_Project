@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Favourites</ion-title>
+    <ion-title>My Favourites</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">Back</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Favourites</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- If no favorites yet -->
+  <div *ngIf="favMovies.length === 0" style="text-align: center; margin-top: 50px;">
+    <p>You haven't added any favourites yet!</p>
+    <ion-button routerLink="/home">Go Find Movies</ion-button>
+  </div>
+
+  <!-- Clear Button -->
+  <ion-button *ngIf="favMovies.length > 0" color="danger" fill="clear" (click)="clearAll()">
+    Clear All Favourites
+  </ion-button>
+
+  <!-- List of Favourites -->
+  <ion-card *ngFor="let movie of favMovies">
+    <a [routerLink]="['/movie-details', movie.id]">
+      <img *ngIf="movie.poster_path" [src]="posterBaseUrl + movie.poster_path" />
+    </a>
+    <ion-card-header>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
