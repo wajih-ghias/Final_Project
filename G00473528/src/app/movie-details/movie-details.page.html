@@ -1,11 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      
     </ion-buttons>
     <ion-title>Movie Details</ion-title>
     <ion-button (click)="openHomePage()">Back to HOME PAGE<ion-icon name="home-outline"></ion-icon></ion-button>
-    <ion-button routerLink="/favorites">Favourite<ion-icon name="heart"></ion-icon></ion-button>
+    <ion-button routerLink="/favourites">Favourites<ion-icon name="heart"></ion-icon></ion-button>
     <ion-buttons slot="end">
       
     </ion-buttons>
@@ -13,18 +12,18 @@
 </ion-header> 
 
 <ion-content class="ion-padding" *ngIf="movie">
-  <h1>{{ movie.title }}</h1>
+  <h1></h1>
  
   <p>{{ movie.overview }}</p>
  
 
   <h3>Top Cast</h3>
   <ion-list>
-    <ion-item *ngFor="let actor of cast">
+    <ion-item *ngFor="let actor of cast" [routerLink]="['/details', actor.id]">
       <ion-label>
         <h2>{{ actor.name }}</h2>
         <p>as {{ actor.character }}</p>
-        <img [src]="posterBaseUrl + actor.profile_path" />
+        <img *ngIf="actor.profile_path" [src]="posterBaseUrl + actor.profile_path" />
       </ion-label>
       <!-- Add to Favourites Button -->
       <!-- <div *ngIf="!isFavoriteActor(actor)">add to favorite</div> -->
@@ -42,4 +41,24 @@
     </ion-item>
   </ion-list>  
   <ion-button *ngIf="!isFavorite" (click)="addToFavorites(movie)">...</ion-button>
+
+
+  <h2>{{ movie.title }}</h2>
+<ion-header>
+  <ion-button 
+    expand="block" 
+    color="primary" 
+    *ngIf="!isMovieFavorite()" 
+    (click)="addMovieToFavorites()">
+    Add Movie to Favourites
+  </ion-button>
+  
+  <ion-button 
+    expand="block" 
+    color="danger" 
+    *ngIf="isMovieFavorite()" 
+    (click)="removeMovieFromFavorites()">
+    Remove Movie from Favourites
+  </ion-button>
+</ion-header>
 </ion-content>

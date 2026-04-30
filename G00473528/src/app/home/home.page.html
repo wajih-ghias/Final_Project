@@ -3,7 +3,7 @@
     <ion-title>
       G00473528
     </ion-title>
-    <ion-button routerLink="/favourites">Favorite<ion-icon name="heart"></ion-icon></ion-button>
+    <ion-button routerLink="/favourites">Favorites<ion-icon name="heart"></ion-icon></ion-button>
   </ion-toolbar>
  
 </ion-header>
@@ -12,13 +12,13 @@
  <ion-input [(ngModel)]="keyword" placeholder="Search movies..."></ion-input>
  <ion-button expand="block"  (click)="openMovies()">Search</ion-button>
  <h2 style="margin-top: 20px;">Today's Trending Movies</h2>
-  <ion-card *ngFor="let movie of movieInfo">
-    <a [routerLink]="['/movie-details',movie.id]">
+  <ion-card *ngFor="let movie of movieInfo" [routerLink]="['/movie-details',movie.id]">
+  
     <img *ngIf="movie.poster_path" [src]="posterBaseUrl + movie.poster_path" />
-    </a>
+    
     <ion-card-header>
       <ion-card-title>{{ movie.title }}</ion-card-title>
-      <ion-card-subtitle>{{movie.overview}}</ion-card-subtitle>
+      <ion-card-content>{{movie.overview}}</ion-card-content>
     </ion-card-header>
   </ion-card>
 </ion-content>

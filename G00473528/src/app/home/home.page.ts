@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonCardContent, IonButtons } from '@ionic/angular/standalone';
 import { MyData } from '../services/my-data';
 import { OnInit } from '@angular/core';
 import { MyHttpService } from '../services/my-http-service';
@@ -13,11 +13,14 @@ import { homeOutline, heart, heartOutline, trashOutline } from 'ionicons/icons';
 
 
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonIcon, IonCardTitle, IonCardHeader, IonCard, IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, IonCardSubtitle, RouterModule],
+  standalone: true,
+  imports: [ IonCardContent, IonIcon, IonCardTitle, IonCardHeader, IonCard, IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, RouterModule],
 })
 export class HomePage implements OnInit {
   keyword: string="" ;

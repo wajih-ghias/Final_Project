@@ -1,13 +1,52 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Details</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Details</ion-title>
-    </ion-toolbar>
+<ion-header>
+  <ion-title>Details</ion-title>
+    <ion-buttons slot="start"></ion-buttons>
+  <ion-button (click)="openHomePage()">Back to HOME PAGE<ion-icon name="home-outline"></ion-icon></ion-button>
+  <ion-buttons slot="end"></ion-buttons>
+  
+  <ion-button *ngIf="!isFavorite" (click)="addToFavorites()">
+    Add to Favourites
+  </ion-button>
+  
+  <ion-button *ngIf="isFavorite" color="danger" (click)="removeFromFavorites()">
+    Remove from Favourites
+  </ion-button>
+  
+  
   </ion-header>
-</ion-content>
+  <ion-content *ngIf="person">
+  
+    <h1>{{ person.name }}</h1>
+  
+  
+    <img *ngIf="person.profile_path"
+         [src]="posterBaseUrl + person.profile_path" />
+  
+  
+    <p><strong>DOB:</strong> {{ person.birthday }}</p>
+    <p><strong>DOD:</strong> {{ person.deathday || 'N/A' }}</p>
+  
+  
+    <p><strong>Also Known As:</strong></p>
+    <ul>
+      <li *ngFor="let name of person.also_known_as">{{ name }}</li>
+    </ul>
+  
+   
+    <p>{{ person.biography }}</p>
+  
+  
+  
+   
+    <h3>Other Movies</h3>
+    <ion-card *ngFor="let m of movies.slice(0,10)">
+      <ion-card-header>
+        <ion-card-title>{{ m.title }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  
+  </ion-content>  
+  
+  
+  

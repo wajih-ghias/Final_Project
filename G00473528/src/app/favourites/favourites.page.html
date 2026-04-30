@@ -1,31 +1,66 @@
-<ion-header>
+
+
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>My Favourites</ion-title>
     <ion-buttons slot="start">
-      <ion-button routerLink="/home">Back</ion-button>
+      <ion-button (click)="goHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
+    <ion-title>My Favourites</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- If no favorites yet -->
-  <div *ngIf="favMovies.length === 0" style="text-align: center; margin-top: 50px;">
-    <p>You haven't added any favourites yet!</p>
-    <ion-button routerLink="/home">Go Find Movies</ion-button>
+ <ion-content class="ion-padding">
+    
+  <div *ngIf="favorites.length === 0" style="text-align: center; margin-top: 50px;"> 
+    <ion-icon name="heart" color="medium" style="font-size: 80px; opacity: 0.3;"></ion-icon>
+    <h3 style="color: var(--ion-color-medium);">No favorites yet!</h3>
+    <ion-button fill="outline" (click)="goHome()">Browse Movies</ion-button>
   </div>
 
-  <!-- Clear Button -->
-  <ion-button *ngIf="favMovies.length > 0" color="danger" fill="clear" (click)="clearAll()">
-    Clear All Favourites
+ <!--
+   <ion-list *ngIf="favorites.length > 0">
+    <ion-item *ngFor="let item of favorites"> 
+         Image (handles both Movies and Actors)  
+       <ion-thumbnail slot="start">  
+        <img [src]="posterBaseUrl + (item.poster_path || item.profile_path)" 
+             onerror="this.src='assets/icon/favicon.png'"/> 
+      </ion-thumbnail> 
+
+       <ion-label>
+        <h2>{{ item.title || item.name }}</h2>
+        <p *ngIf="item.release_date">Released: {{ item.release_date }}</p>
+        <p *ngIf="item.character">Played: {{ item.character }}</p>
+      </ion-label> 
+
+      Requirement: Remove from favorite button 
+       <ion-button slot="end" fill="clear" color="danger" (click)="removeFromFavorites(item)">
+         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+ </ion-content> 
+
+-->
+
+<ion-card *ngFor="let item of favorites" >
+
+  <img [src]="getImage(item.poster_path || item.profile_path)" />
+
+  <ion-card-header>
+    <ion-card-title>
+      {{ item.title || item.name }}
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p *ngIf="item.type === 'movie'">Movie</p>
+    <p *ngIf="item.type === 'person'">Actor</p>
+  </ion-card-content>
+
+  <ion-button color="danger" (click)="removeFromFavorites(item)">
+    Remove From Favourites
   </ion-button>
 
-  <!-- List of Favourites -->
-  <ion-card *ngFor="let movie of favMovies">
-    <a [routerLink]="['/movie-details', movie.id]">
-      <img *ngIf="movie.poster_path" [src]="posterBaseUrl + movie.poster_path" />
-    </a>
-    <ion-card-header>
-      <ion-card-title>{{ movie.title }}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
-</ion-content>
+</ion-card>
