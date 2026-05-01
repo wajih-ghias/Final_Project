@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon, IonButtons } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { addIcons } from 'ionicons';
+import { trashOutline, heart, homeOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 import { MyHttpService } from '../services/my-http-service';
 import { MyData } from '../services/my-data';
@@ -24,7 +25,9 @@ movies: any[] = [];
 posterBaseUrl = "https://image.tmdb.org/t/p/w500";
 apiKey = "79c899073398240e8015ac544982ea07";
 
-  constructor(private route: ActivatedRoute, private mhs: MyHttpService, private ds: MyData, private router: Router) { }
+  constructor(private route: ActivatedRoute, private mhs: MyHttpService, private ds: MyData, private router: Router) {
+    addIcons({ trashOutline, heart, homeOutline });
+   }
 
    ngOnInit() {}
   async ngAfterViewInit() {

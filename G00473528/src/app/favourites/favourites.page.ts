@@ -28,22 +28,22 @@ export class FavouritesPage {
 
 
   constructor(private ds: MyData, private router: Router) {
-    // Requirements: Need trash icon for removal
+  
     addIcons({ trashOutline, heart, homeOutline });
   }
 
-  // Refresh data every time the page is viewed
+  
   async ionViewWillEnter() {
     this.favorites = await this.ds.get('favorites') || [];
     console.log("Loaded Favorites:", this.favorites);
   }
 
-  // Requirement: Remove from favorite button logic
+  
   async removeFromFavorites(item: any) {
-    // 1. Update the local array by filtering out the clicked item
+   
     this.favorites = this.favorites.filter((f: any) => f.id !== item.id);
     
-    // 2. Save the new filtered array back to your MyData service
+
     await this.ds.set('favorites', this.favorites);
     
     console.log("Item removed. Updated list:", this.favorites);

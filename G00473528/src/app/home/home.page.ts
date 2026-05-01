@@ -11,10 +11,6 @@ import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { homeOutline, heart, heartOutline, trashOutline } from 'ionicons/icons';
 
-
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',

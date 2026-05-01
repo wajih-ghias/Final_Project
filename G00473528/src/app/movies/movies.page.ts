@@ -64,8 +64,6 @@ export class MoviesPage implements OnInit {
       this.movieInfo = [];
     }
 
-    //this.options.url = this.options.url.concat(this.keyword);
-    //this.mhs.get(this.options)
   }
   async openHomePage(){
     this.router.navigate(['/home']);

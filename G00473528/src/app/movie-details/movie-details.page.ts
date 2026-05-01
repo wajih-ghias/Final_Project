@@ -10,6 +10,7 @@ import { addIcons } from 'ionicons';
 import { homeOutline, heart, heartOutline, trashOutline } from 'ionicons/icons'; 
 import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { listOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-movie-details',
@@ -30,7 +31,7 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
 
 
   constructor(private route: ActivatedRoute, private mhs: MyHttpService, private ds: MyData, private router: Router) {
-    addIcons({ homeOutline, heart, heartOutline, trashOutline });
+    addIcons({ homeOutline, heart, heartOutline, trashOutline, listOutline });
    }
 
   async ngOnInit() { }
@@ -53,7 +54,7 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
     this.movie = result.data;
     //this.cast = result.data.cast.slice(0, 10) ?? result.data.cast; // Top 10 actors
     this.cast = this.movie.credits.cast.slice(0, 10);
-    //this.crew = result.data.crew.filter((m: any) => m.job === 'Director'); // Get Director
+ 
     this.crew = this.movie.credits.crew.filter((m: any) => m.job === 'Director');
     
     //console.log(this.movie);
@@ -67,33 +68,11 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
   }
 }
 
-  // async addToFavorites(actor: any) {
-  //   let favorites = await this.ds.get('favorites') || [];
-  //   // Ensure we don't add duplicates
-  //   if (!favorites.some((f: any) => f.id === actor.id)) {
-  //     favorites.push(actor);
-  //     await this.ds.set('favorites', favorites);
-  //     this.favorites = favorites;
-  //     this.isFavorite = true;
-  //     console.log("Added to favorites", favorites );
-  //   }
-  // }
-  
-  // async removeFromFavorites(actor: any) {
-  //   let favorites = await this.ds.get('favorites') || [];
-  //   // Filter out the current movie
-  //   favorites = favorites.filter((f: any) => f.id !== actor.id);
-  //   await this.ds.set('favorites', favorites);
-  //   this.favorites = favorites;
-  //   this.isFavorite = false;
-  //   console.log("Removed from favorites");
-  // }
-
   async addToFavorites(movie: any) {
     let favorites = await this.ds.get('favorites') || [];
   
     if (!favorites.some((f: any) => f.id === movie.id)) {
-      favorites.push({ ...movie, type: 'movie' }); // ✅ tag type
+      favorites.push({ ...movie, type: 'movie' }); 
       await this.ds.set('favorites', favorites);
       this.isFavorite = true;
     }
@@ -115,7 +94,7 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
         id: this.movie.id,
         title: this.movie.title,
         poster_path: this.movie.poster_path,
-        type: 'movie'   // 🔥 REQUIRED
+        type: 'movie'   
       });
   
       await this.ds.set('favorites', favorites);
@@ -146,11 +125,10 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
 
 
  isFavoriteActor(actor: any): boolean {
-  if (!this.favorites) return false; // Safety check
+  if (!this.favorites) return false; 
   return this.favorites.some((f: any) => f.id === actor.id);
   
-  //const found = this.favorites.filter((f: any) => f.id === actor.id);
-    //return found.length > 0 ;
+ 
   }
 
 

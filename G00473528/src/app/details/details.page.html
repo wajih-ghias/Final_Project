@@ -7,10 +7,12 @@
   
   <ion-button *ngIf="!isFavorite" (click)="addToFavorites()">
     Add to Favourites
+    <ion-icon slot="start" name="heart-outline"></ion-icon> 
   </ion-button>
   
   <ion-button *ngIf="isFavorite" color="danger" (click)="removeFromFavorites()">
     Remove from Favourites
+    <ion-icon slot="start" name="trash-outline"></ion-icon>
   </ion-button>
   
   
