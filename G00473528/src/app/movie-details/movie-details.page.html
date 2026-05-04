@@ -8,12 +8,12 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Movie Details</ion-title>
+    <ion-title></ion-title>
 
     <!-- Add/Remove - View Favourites List -->
     <ion-buttons slot="end">
       <!-- Favourite Movie Button -->
-      <ion-button *ngIf="!isMovieFavorite()" (click)="addMovieToFavorites()" color="dark">
+      <ion-button *ngIf="!isMovieFavorite()" (click)="addMovieToFavorites()" color="primary" fill="solid">
         Add Movie To Favourites
         <ion-icon slot="start" name="heart-outline"></ion-icon>
       </ion-button>
@@ -25,7 +25,7 @@
 
       <!-- Favourites Page -->
       <ion-button routerLink="/favourites">
-        <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="heart-outline" color="danger" fill="solid"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
