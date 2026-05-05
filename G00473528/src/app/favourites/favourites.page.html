@@ -26,20 +26,34 @@
   <ion-card-header>
     <ion-card-title>
       {{ item.title || item.name }}
+      <p *ngIf="item.type === 'movie'">Movie</p>
+    <p *ngIf="item.type === 'person'">Actor</p>
       
     </ion-card-title>
   </ion-card-header>
 
   <ion-card-header>
     <ion-card-content>
-      <ion-button expand="primary" fill="solid" [routerLink]="['/movie-details', item.id]">Details</ion-button>
+      <!-- <ion-button expand="primary" fill="solid" [routerLink]="['/movie-details', item.id]">Details</ion-button> -->
+      <ion-button 
+      expand="block" 
+      fill="solid" 
+      *ngIf="item.type === 'movie'" 
+      [routerLink]="['/movie-details', item.id]">
+      Movie Details
+    </ion-button>
+    
+    <ion-button 
+      expand="block" 
+      fill="solid" 
+      *ngIf="item.type === 'person'" 
+      [routerLink]="['/details', item.id]">
+      Actor Details
+    </ion-button>
     </ion-card-content>
   </ion-card-header>
 
-  <ion-card-content>
-    <p *ngIf="item.type === 'movie'">Movie</p>
-    <p *ngIf="item.type === 'person'">Actor</p>
-  </ion-card-content>
+  
 
   <ion-button color="danger" (click)="removeFromFavorites(item)">
     Remove From Favourites

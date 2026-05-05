@@ -36,6 +36,7 @@ export class FavouritesPage {
   async ionViewWillEnter() {
     this.favorites = await this.ds.get('favorites') || [];
     console.log("Loaded Favorites:", this.favorites);
+    console.log( await this.ds.get('favorites'));
   }
 
   

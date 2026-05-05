@@ -96,41 +96,33 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
         poster_path: this.movie.poster_path,
         type: 'movie'   
       });
-  
       await this.ds.set('favorites', favorites);
       this.favorites = favorites;
-  
       console.log("Movie added:", this.movie.title);
     }
   }
+
+
   async removeMovieFromFavorites() {
     let favorites = await this.ds.get('favorites') || [];
-  
     favorites = favorites.filter(
       (f: any) => !(f.id === this.movie.id && f.type === 'movie')
     );
-  
     await this.ds.set('favorites', favorites);
     this.favorites = favorites;
-  
     console.log("Movie removed");
   }
   isMovieFavorite(): boolean {
     if (!this.favorites) return false;
-  
     return this.favorites.some(
       (f: any) => f.id === this.movie.id && f.type === 'movie'
     );
   }
 
-
  isFavoriteActor(actor: any): boolean {
   if (!this.favorites) return false; 
   return this.favorites.some((f: any) => f.id === actor.id);
-  
- 
   }
-
 
 
 
