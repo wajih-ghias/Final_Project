@@ -10,17 +10,17 @@
 
     <ion-title></ion-title>
 
-    <!-- Add/Remove - View Favourites List -->
+   
     <ion-buttons slot="end">
-      <!-- Favourite Movie Button -->
+      
       <ion-button *ngIf="!isMovieFavorite()" (click)="addMovieToFavorites()" color="primary" fill="solid">
-        Add Movie To Favourites
+        Add To Favourites
         <ion-icon slot="start" name="heart-outline"></ion-icon>
       </ion-button>
       
       <ion-button *ngIf="isMovieFavorite()" (click)="removeMovieFromFavorites()" color="danger">
         Remove From Favourites
-        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        <ion-icon slot="start" name="heart-outline"></ion-icon>
       </ion-button>
 
       <!-- Favourites Page -->

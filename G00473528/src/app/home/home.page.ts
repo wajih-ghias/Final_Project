@@ -16,7 +16,7 @@ import { homeOutline, heart, heartOutline, trashOutline } from 'ionicons/icons';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [ IonCardContent, IonIcon, IonCardTitle, IonCardHeader, IonCard, IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, RouterModule],
+  imports: [ IonCardContent, IonIcon, IonCardTitle, IonCard, IonButton, IonInput, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, FormsModule, RouterModule],
 })
 export class HomePage implements OnInit {
   keyword: string="" ;
