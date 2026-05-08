@@ -58,7 +58,7 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
     this.crew = this.movie.credits.crew.filter((m: any) => m.job === 'Director');
     
     //console.log(this.movie);
-    // Check if favorite
+    
     this.favorites = await this.ds.get('favorites') || [];
     this.isFavorite = this.favorites.some((f: any) => f.id === this.movie.id);
     console.log('favorties: ',this.favorites);
@@ -125,8 +125,6 @@ export class MovieDetailsPage implements OnInit, AfterViewInit {
   }
 
 
-
-  
   async openHomePage() {
     this.router.navigate(['/home']);
   }

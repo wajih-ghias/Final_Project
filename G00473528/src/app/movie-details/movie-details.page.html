@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-toolbar>
-    <!--Back to Home -->
+    
     <ion-buttons slot="start">
       <ion-button (click)="openHomePage()">
         <ion-icon slot="icon-only" name="home-outline"></ion-icon>
@@ -23,13 +23,15 @@
         <ion-icon slot="start" name="heart-outline"></ion-icon>
       </ion-button>
 
-      <!-- Favourites Page -->
+      
       <ion-button routerLink="/favourites">
         <ion-icon slot="icon-only" name="heart-outline" color="danger" fill="solid"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content class="ion-padding" *ngIf="movie">
  

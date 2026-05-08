@@ -3,15 +3,14 @@
     <ion-title>
       G00473528
     </ion-title>
-    <ion-button routerLink="/favourites" slot="end" ><ion-icon name="heart"></ion-icon></ion-button>
+    <ion-button routerLink="/favourites" slot="end" color="primary"><ion-icon slot="icon-only" name="heart-outline" ></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
- <ion-input [(ngModel)]="keyword" placeholder="Search movies..."></ion-input>
+ <ion-input [(ngModel)]="keyword" placeholder="Search movies..." clearInput="true"></ion-input>
  <ion-button expand="block"  (click)="openMovies()">Search</ion-button>
  <h2 style="margin-top: 20px;">Today's Trending Movies</h2>
- 
  
   <ion-card *ngFor="let movie of movieInfo" [routerLink]="['/movie-details',movie.id]">
   

@@ -1,5 +1,5 @@
 
-<ion-header>
+<!-- <ion-header> 
   <ion-title></ion-title>
     <ion-buttons slot="start"></ion-buttons>
   <ion-button (click)="openHomePage()"><ion-icon name="home-outline"></ion-icon></ion-button>
@@ -38,9 +38,6 @@
    
     <p>{{ person.biography }}</p>
   
-  
-  
-   
     <h3>Other Movies</h3>
     <ion-card *ngFor="let m of movies.slice(0,10)">
       <ion-card-header>
@@ -48,7 +45,134 @@
       </ion-card-header>
     </ion-card>
   
-  </ion-content>  
+  </ion-content>  -->
+
+  <ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="openHomePage()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>{{ person?.name }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/favourites" slot="end" ><ion-icon slot="icon-only" name="heart-outline" fill="solid" color="danger"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+      
+      <ion-button *ngIf="!isFavorite" (click)="addToFavorites()">
+        <ion-icon slot="start" name="heart-outline"></ion-icon>
+        Add to Favourite
+      </ion-button>
+
+     
+      <ion-button *ngIf="isFavorite" color="danger" (click)="removeFromFavorites()">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Remove from Favourites
+      </ion-button>
+
+  
+
+<ion-content class="ion-padding" *ngIf="person">
+<ion-card>
+  
+  <div style="text-align:left; margin-bottom:20px;">
+
+    
+    <img
+      *ngIf="person.profile_path; else noImage"
+      [src]="posterBaseUrl + person.profile_path"
+      style="width:500px; border-radius:12px;"
+    />
+
+    
+    <ng-template #noImage>
+      <div
+        style="
+          width:200px;
+          height:300px;
+          margin:auto;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          border:1px solid #ccc;
+          border-radius:12px;
+        "
+      >
+        No Image
+      </div>
+    </ng-template>
+
+  </div>
+</ion-card>
+ 
+  <h1>{{ person.name }}</h1>
+
+
+  <p *ngIf="person.birthday">
+    <strong>DOB:</strong> {{ person.birthday }}
+  </p>
+
+
+  <p *ngIf="person.deathday">
+    <strong>DOD:</strong> {{ person.deathday }}
+  </p>
+
+  
+  <div *ngIf="person.also_known_as?.length > 0">
+    <p><strong>Also Known As:</strong></p>
+
+    <ul>
+      <li *ngFor="let aka of person.also_known_as">
+        {{ aka }}
+      </li>
+    </ul>
+  </div>
+
+  
+  <div *ngIf="person.biography">
+    <h3>Biography</h3>
+    <p>{{ person.biography }}</p>
+  </div>
+
+ 
+  <h3>Other Movies</h3>
+
+  <ion-card *ngFor="let m of movies.slice(0,10)">
+
+    
+    <img
+      *ngIf="m.poster_path; else noMovieImage"
+      [src]="posterBaseUrl + m.poster_path"
+    />
+
+   
+    <ng-template #noMovieImage>
+      <div
+        style="
+          height:250px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          border:1px solid #ccc;
+        "
+      >
+        No Image
+      </div>
+    </ng-template>
+
+    <ion-card-header>
+      <ion-card-title>{{ m.title }}</ion-card-title>
+    </ion-card-header>
+
+  </ion-card>
+
+</ion-content>
   
   
   

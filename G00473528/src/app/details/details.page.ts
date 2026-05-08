@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonButton, IonIcon, IonButtons } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { trashOutline, heart, homeOutline } from 'ionicons/icons';
+import { trashOutline, heart, homeOutline, heartOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 import { MyHttpService } from '../services/my-http-service';
 import { MyData } from '../services/my-data';
@@ -14,7 +14,7 @@ import { MyData } from '../services/my-data';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
   standalone: true,
-  imports: [IonButtons, IonIcon, IonButton, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, CommonModule, FormsModule, RouterModule ]
+  imports: [IonButtons, IonIcon, IonToolbar, IonButton, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, CommonModule, FormsModule, RouterModule ]
 })
 export class DetailsPage implements OnInit {
 favorites: any[] = [];
@@ -26,7 +26,7 @@ posterBaseUrl = "https://image.tmdb.org/t/p/w500";
 apiKey = "79c899073398240e8015ac544982ea07";
 
   constructor(private route: ActivatedRoute, private mhs: MyHttpService, private ds: MyData, private router: Router) {
-    addIcons({ trashOutline, heart, homeOutline });
+    addIcons({homeOutline,heart,heartOutline,trashOutline});
    }
 
    ngOnInit() {}
