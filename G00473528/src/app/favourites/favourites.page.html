@@ -36,7 +36,7 @@
     <ion-card-content>
       <!-- <ion-button expand="primary" fill="solid" [routerLink]="['/movie-details', item.id]">Details</ion-button> -->
       <ion-button 
-      expand="block" 
+       
       fill="solid" 
       *ngIf="item.type === 'movie'" 
       [routerLink]="['/movie-details', item.id]">
@@ -44,7 +44,7 @@
     </ion-button>
     
     <ion-button 
-      expand="block" 
+      
       fill="solid" 
       *ngIf="item.type === 'person'" 
       [routerLink]="['/details', item.id]">
